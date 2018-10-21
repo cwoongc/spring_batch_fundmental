@@ -79,7 +79,7 @@ public class BatchConfiguration {
     }
 
     /**
-     * JobLauncher : Job과 Step을
+     * JobLauncher : Job과 JobParameter를 run()메소드의 인수로 받아 Job을 실행하는 런쳐 객체 @Bean 등록
      * SimpleJobLauncher -> JobRepository -> DataSource, TransactionManager
      * @param jobRepository
      * @return
@@ -92,7 +92,6 @@ public class BatchConfiguration {
     }
 
     /**
-     * JobExplorer : 수행된 JobInstance-<JobExecution, StepInstance-<StepExecution 등을 검색해오는데 사용되는 인터페이스
      *
      * JobExplorerFactoryBean -> DataSource
      * @param dataSource
@@ -107,6 +106,12 @@ public class BatchConfiguration {
         return factoryBean;
     }
 
+    /**
+     * JobExplorer : 수행된 JobInstance-[JobExecution, StepInstance-[StepExecution 등을 검색해오는데 사용되는 인터페이스
+     * @param factoryBean
+     * @return
+     * @throws Exception
+     */
     @Bean
     public JobExplorer jobExplorer(JobExplorerFactoryBean factoryBean) throws Exception {
         return factoryBean.getObject();
